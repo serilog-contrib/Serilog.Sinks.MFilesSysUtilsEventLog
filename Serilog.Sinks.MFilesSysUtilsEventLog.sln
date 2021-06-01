@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{806401C5-E7BF-4479-99A8-255446A6E28F}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\Publish-current-to-nuget.yml = .github\workflows\Publish-current-to-nuget.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{3A6B821F-6B19-4142-94E1-E221604091C3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33703E74-C77C-4E3F-A3AF-CFD0720E0543}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.MFilesSysUtilsEventLog", "src\Serilog.Sinks.MFilesSysUtilsEventLog\Serilog.Sinks.MFilesSysUtilsEventLog.csproj", "{30292687-46C3-4BFA-80FC-AC923B309204}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30292687-46C3-4BFA-80FC-AC923B309204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30292687-46C3-4BFA-80FC-AC923B309204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30292687-46C3-4BFA-80FC-AC923B309204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30292687-46C3-4BFA-80FC-AC923B309204}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42C37430-F862-4FD7-BD3D-70B9F3B5AA4B}
+	EndGlobalSection
+EndGlobal

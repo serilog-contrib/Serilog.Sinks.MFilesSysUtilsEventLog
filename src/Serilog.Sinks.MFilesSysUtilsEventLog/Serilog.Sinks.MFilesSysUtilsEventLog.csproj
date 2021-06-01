@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45</TargetFrameworks>
+    <RootNamespace>Serilog</RootNamespace>
+    <Title>Serilog.Sinks.MFilesSysUtilsEventLog</Title>
+    <Authors>Victor Vogelpoel</Authors>
+    <Company>Dramatic Development</Company>
+    <Copyright>Copyright (c) 2021 Dramatic Development - Victor Vogelpoel</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>serilog M-Files MFiles VAF eventlog</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <FileVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmm"))</FileVersion>
+    <Description>A Serilog sink to write to the EventLog in an M-Files Vault Application (via SysUtils)</Description>
+    <PackageIcon>serilog-sink-nuget.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MFiles.VAF" Version="2.2.0.11" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="serilog-sink-nuget.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="Pack" Condition=" '$(Configuration)' == 'Release'">
+    <RemoveDir Directories="..\..\current" />
+    <Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="..\..\current" />
+  </Target>
+
+
+</Project>
