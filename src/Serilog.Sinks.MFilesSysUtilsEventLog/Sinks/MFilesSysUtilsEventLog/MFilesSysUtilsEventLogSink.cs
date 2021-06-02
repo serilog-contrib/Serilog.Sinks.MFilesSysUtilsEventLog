@@ -17,19 +17,24 @@
 // limitations under the License.
 //
 using System;
+using System.IO;
 using MFiles.VAF.Common;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting;
 
 namespace Serilog.Sinks.MFilesSysUtilsEventLog
 {
     public class MFilesSysUtilsEventLogSink : ILogEventSink
     {
-        private readonly IFormatProvider _formatProvider;
+        const int MaximumPayloadLengthChars = 31839; // https://msdn.microsoft.com/en-us/library/e29k5ebc%28v=vs.110%29.aspx
 
-        public MFilesSysUtilsEventLogSink(IFormatProvider formatProvider)
+        private readonly ITextFormatter _textFormatter;
+
+        public MFilesSysUtilsEventLogSink(ITextFormatter formatter)
         {
-            _formatProvider = formatProvider;
+            _textFormatter              = formatter ?? throw new ArgumentNullException(nameof(formatter));
+
         }
 
         public void Emit(LogEvent logEvent)
@@ -40,19 +45,30 @@ namespace Serilog.Sinks.MFilesSysUtilsEventLog
                 return;
             }
 
-            var message = logEvent.RenderMessage(_formatProvider);
 
-            var entryType = System.Diagnostics.EventLogEntryType.Information;
-            if (logEvent.Level == LogEventLevel.Warning)
+            using (var payloadWriter = new StringWriter())
             {
-                entryType = System.Diagnostics.EventLogEntryType.Warning;
-            }
-            else if (logEvent.Level == LogEventLevel.Error || logEvent.Level == LogEventLevel.Fatal)
-            {
-                entryType = System.Diagnostics.EventLogEntryType.Error;
-            }
+                _textFormatter.Format(logEvent, payloadWriter);
 
-            SysUtils.ReportToEventLog(message, entryType);
+                var payload = payloadWriter.ToString();
+
+                if (payload.Length > MaximumPayloadLengthChars)
+                {
+                    payload = payload.Substring(0, MaximumPayloadLengthChars);
+                }
+
+                var entryType = System.Diagnostics.EventLogEntryType.Information;
+                if (logEvent.Level == LogEventLevel.Warning)
+                {
+                    entryType = System.Diagnostics.EventLogEntryType.Warning;
+                }
+                else if (logEvent.Level == LogEventLevel.Error || logEvent.Level == LogEventLevel.Fatal)
+                {
+                    entryType = System.Diagnostics.EventLogEntryType.Error;
+                }
+
+                SysUtils.ReportToEventLog(payload, entryType);
+            }
         }
     }
 }
