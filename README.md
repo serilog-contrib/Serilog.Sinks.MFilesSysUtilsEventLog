@@ -87,9 +87,23 @@ Your vault application can be installed on either a local M-Files server or on a
 A cloud vault is operated by the M-Files CloudOps team and you do not have direct access to the Windows Event log on the (Azure) server where the vault runs. If you want your vault application's logging, you'll have to request it from M-Files support. It's hardly ideal, but at least you're using structured logging with Serilog in your application now!
 I have another logging solution coming up that will help in logging scenarios in cloud vault application.
 
-## Sample vault application screenshots
+## Sample vault application
 
 The sample vault application writes some log messages upon startup and with firing of the MFEventHandlerBeforeCheckInChangesFinalize event for an Document ObjectType.
+
+It has not one but **two** MFilesSysUtilsEventLogSinks configured, one with the default output message template and the other with the RenderedCompactJsonFormatter and outputs the log event in JSON format to the Windows event log and contains *all* log event properties.
+
+Because of the two sinks, the Windows Event Log will contain the **same** log event twice, but differently formatted. It demonstrates that a log pipeline can be build with multiple sinks, even the same sink with different parameters.
+
+```text
+// The FIRST will only show the log event message; the "MFEventType" property is not shown, because it is not part of the default message template.
+//   "User 33 has checked in document 506 at 06/01/2021 21:15:10"
+```
+
+```text
+// The SECOND will show the JSON rendering of the log event, INCLUDING the "MFEventType" property that was added from the LogContext.
+//   {"@t":"2021-06-01T21:15:10.9941533Z","@m":"User 33 has checked in document 506 at 06/01/2021 21:15:10","@i":"5cf5a3bc","UserID":33,"DisplayID":506,,"TimeStamp":"2021-06-01T21:15:10.9931527+02:00"","MFEventType":"MFEventHandlerBeforeCheckInChangesFinalize"}
+```
 
 These screen shots are from the Windows Event log on a local M-Files server and from the M-Files Admin.
 
