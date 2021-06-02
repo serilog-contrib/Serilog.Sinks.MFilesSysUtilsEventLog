@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33703E74-C77C-4E3F-A3AF-CFD0720E0543}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.MFilesSysUtilsEventLog", "src\Serilog.Sinks.MFilesSysUtilsEventLog\Serilog.Sinks.MFilesSysUtilsEventLog.csproj", "{30292687-46C3-4BFA-80FC-AC923B309204}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{431B08B0-8874-4BB1-89A9-72B01169FDCE}"
