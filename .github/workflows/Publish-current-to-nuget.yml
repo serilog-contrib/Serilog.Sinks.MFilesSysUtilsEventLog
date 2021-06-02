@@ -6,7 +6,7 @@ on:
     paths: ["current/**"]
 
 jobs:
-  build:
+  publish-nupkg:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
