@@ -20,15 +20,61 @@ using System;
 using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting;
+using Serilog.Formatting.Display;
 using Serilog.Sinks.MFilesSysUtilsEventLog;
 
 namespace Serilog
 {
     public static class MFilesSysUtilsEventLogSinkExtensions
     {
-        public static LoggerConfiguration MFilesSysUtilsEventLogSink(this LoggerSinkConfiguration loggerSinkConfiguration, LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum, IFormatProvider formatProvider = null, LoggingLevelSwitch levelSwitch = null)
+        const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
+
+        /// <summary>
+        /// Writes log events to the M-Files SysUtils event log helper
+        /// </summary>
+        /// <param name="loggerSinkConfiguration">Logger sink configuration</param>
+        /// <param name="restrictedToMinimumLevel">The minimum level for
+        /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+        /// <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+        /// <param name="levelSwitch">The minimum level for
+        /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+        /// <returns></returns>
+        public static LoggerConfiguration MFilesSysUtilsEventLogSink(
+            this LoggerSinkConfiguration loggerSinkConfiguration,
+            LogEventLevel restrictedToMinimumLevel                  = LevelAlias.Minimum,
+            string outputTemplate                                   = DefaultOutputTemplate,
+            IFormatProvider formatProvider                          = null,
+            LoggingLevelSwitch levelSwitch                          = null)
         {
-            return loggerSinkConfiguration.Sink(new MFilesSysUtilsEventLogSink(formatProvider), restrictedToMinimumLevel, levelSwitch);
+            if (loggerSinkConfiguration is null) throw new ArgumentNullException(nameof(loggerSinkConfiguration));
+
+            var formatter = new MessageTemplateTextFormatter(outputTemplate, formatProvider);
+
+            return loggerSinkConfiguration.Sink(new MFilesSysUtilsEventLogSink(formatter), restrictedToMinimumLevel, levelSwitch);
+        }
+
+
+        /// <summary>
+        /// Writes log events to the M-Files SysUtils event log helper
+        /// </summary>
+        /// <param name="loggerSinkConfiguration">Logger sink configuration</param>
+        /// <param name="formatter">Controls the rendering of log events into text, for example to log JSON. To
+        /// control plain text formatting, use the overload that accepts an output template.</param>
+        /// <param name="restrictedToMinimumLevel">The minimum level for
+        /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+        /// <param name="levelSwitch"></param>
+        /// <returns></returns>
+        public static LoggerConfiguration MFilesSysUtilsEventLogSink(
+            this LoggerSinkConfiguration loggerSinkConfiguration,
+            ITextFormatter formatter,
+            LogEventLevel restrictedToMinimumLevel                  = LevelAlias.Minimum,
+            LoggingLevelSwitch levelSwitch                          = null)
+        {
+            if (loggerSinkConfiguration is null)    throw new ArgumentNullException(nameof(loggerSinkConfiguration));
+            if (formatter is null)                  throw new ArgumentNullException(nameof(formatter));
+
+            return loggerSinkConfiguration.Sink(new MFilesSysUtilsEventLogSink(formatter), restrictedToMinimumLevel, levelSwitch);
         }
     }
 }

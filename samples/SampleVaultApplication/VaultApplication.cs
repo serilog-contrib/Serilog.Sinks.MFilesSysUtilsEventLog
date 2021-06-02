@@ -23,8 +23,10 @@ using MFiles.VAF.Configuration.AdminConfigurations;
 using MFiles.VAF.Core;
 using MFilesAPI;
 using Serilog;
+using Serilog.Context;
 using Serilog.Core;
 using Serilog.Events;
+using Serilog.Formatting.Compact;
 
 namespace SampleVaultApplication
 {
@@ -63,8 +65,15 @@ namespace SampleVaultApplication
 
             // Configure logging
             Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
                 .MinimumLevel.ControlledBy(_loggingLevelSwitch)
+
+                // Write the same log event to the MFilesSysUtilsEventLogSink with the default message template
                 .WriteTo.MFilesSysUtilsEventLogSink()
+
+                // Write the same log event to the MFilesSysUtilsEventLogSink, but format it as JSON. Now other log properties beyond the message template are visible too.
+                .WriteTo.MFilesSysUtilsEventLogSink(formatter: new RenderedCompactJsonFormatter ())
+
                 .CreateLogger();
         }
 
@@ -107,7 +116,20 @@ namespace SampleVaultApplication
         [EventHandler(MFEventHandlerType.MFEventHandlerBeforeCheckInChangesFinalize, ObjectType = (int)MFBuiltInObjectType.MFBuiltInObjectTypeDocument)]
         public void BeforeCheckInChangesFinalizeUpdateLogDemo(EventHandlerEnvironment env)
         {
-            Log.Information("User {UserID} has checked in document {DisplayID} at {TimeStamp}", env.CurrentUserID, env.DisplayID, DateTime.Now);
+            using (LogContext.PushProperty("MFEventType", env.EventType.ToString()))  // Note "Enrich.FromLogContext()" in the configuration builder!
+            {
+                // Now every log event in this scope automatically has this additional property "MFEventType" from the M-Files event handler environment!
+                // Note that the the Log.Information statement will yield TWO event log entries, because we addeded TWO MFilesSysUtilsEventLogSink
+                // to the log configuration builder.
+                //
+                // The FIRST will only show the log event message; the "MFEventType" property is not shown, because it is not part of the default message template.
+                //   "User 33 has checked in document 506 at 06/01/2021 21:15:10"
+                //
+                // The SECOND will show the JSON rendering of the log event, INCLUDING the "MFEventType" property that was added from the LogContext.
+                //   {"@t":"2021-06-01T21:15:10.9941533Z","@m":"User 33 has checked in document 506 at 06/01/2021 21:15:10","@i":"5cf5a3bc","UserID":33,"DisplayID":506,,"TimeStamp":"2021-06-01T21:15:10.9931527+02:00"","MFEventType":"MFEventHandlerBeforeCheckInChangesFinalize"}
+
+                Log.Information("User {UserID} has checked in document {DisplayID} at {TimeStamp}", env.CurrentUserID, env.DisplayID, DateTime.Now);
+            }
         }
     }
 }
