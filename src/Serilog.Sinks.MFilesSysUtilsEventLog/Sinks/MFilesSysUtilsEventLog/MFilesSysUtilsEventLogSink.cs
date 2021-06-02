@@ -5,13 +5,7 @@
 // If it doesn't, I don't know who wrote it.
 //
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MFiles.VAF.Common;
-using Serilog;
-using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Events;
 
@@ -28,6 +22,7 @@ namespace Serilog.Sinks.MFilesSysUtilsEventLog
 
         public void Emit(LogEvent logEvent)
         {
+            // Do not log Debug or Verbose level
             if (logEvent.Level == LogEventLevel.Debug || logEvent.Level == LogEventLevel.Verbose)
             {
                 return;
