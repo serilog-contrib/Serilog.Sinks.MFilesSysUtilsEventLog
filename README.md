@@ -1,15 +1,15 @@
 # Serilog.Sinks.MFilesSysUtilsEventLog
 
-A Serilog sink to write to the Windows EventLog in an M-Files Vault Application (via SysUtils).
+A Serilog sink to write to the Windows EventLog in an M-Files vault application (via SysUtils).
 
 *Please note that this library is provided "as-is" and with no warranty, explicit or otherwise. You should ensure that the functionality meets your requirements, and thoroughly test them, prior to using in any production scenarios.*
 
 ## Use case
 
-An Vault Application is an addon for an M-Files Vault which has been created using the [M-Files Vault Application Framework](https://developer.m-files.com/Frameworks/Vault-Application-Framework/).
+An vault application is an addon for an M-Files Vault which has been created using the [M-Files Vault Application Framework](https://developer.m-files.com/Frameworks/Vault-Application-Framework/).
 The currently only supported way of logging is using the [SysUtils Event Log reporting helper](https://developer.m-files.com/Frameworks/Vault-Application-Framework/Helpers/SysUtils/#event-log-reporting).
 
-The **Serilog.Sinks.MFilesSysUtilsEventLog** sink makes it possible to use Serilog *structured logging* in a Vault Application. For more information about Serilog, see [Serilog.net](https://serilog.net/) and [https://github.com/serilog/serilog](https://github.com/serilog/serilog).
+The **Serilog.Sinks.MFilesSysUtilsEventLog** sink makes it possible to use *Serilog structured logging* in an M-Files vault application. For more information about Serilog, see [Serilog.net](https://serilog.net/) and [https://github.com/serilog/serilog](https://github.com/serilog/serilog).
 
 
 ```csharp
@@ -22,16 +22,16 @@ Log.Information("Hello from the Vault Application");
 
 ## Dependencies
 
-The Serilog.Sinks.MFilesSysUtilsEventLog sink uses MFiles.VAF version 2.2.0.11 and Serilog 2.10.0
+The Serilog.Sinks.MFilesSysUtilsEventLog sink uses [MFiles.VAF version 2.2.0.11](https://www.nuget.org/packages/MFiles.VAF/2.2.0.11) and [Serilog 2.10.0](https://www.nuget.org/packages/Serilog/2.10.0).
 
 ## How to add Serilog.Sinks.MFilesSysUtilsEventLog to your vault application
 
-1. Open your Vault Application solution in Visual Studio and choose `Manage NuGet packages...`. Browse for package 'Serilog.Sinks.MFilesSysUtilsEventLog' and add it to your solution.
+1. Open your vault application solution in Visual Studio and choose `Manage NuGet packages...`. Browse for package 'Serilog.Sinks.MFilesSysUtilsEventLog' and add it to your solution.
 1. Add `using Serilog;` at the top of your application.
-1. In your Vault Application class, override InitializeApplication(Vault vault) and add a logging configuration bulder, where you write to the `MFilesSysUtilsEventLogSink` (see below)
+1. In your VaultApplication.cs class, override InitializeApplication(Vault vault) and add a logging configuration bulder, where you write to the `MFilesSysUtilsEventLogSink` (see below)
 1. Add Serilog Log.xxx() statements in your use case code.
 
-
+See the sample vault application in this solution that uses the sink and even allows for setting the logging level in the vault application configuration in M-Files Admin.
 
 ## Example use in a Vault Application
 
@@ -53,21 +53,25 @@ namespace DemoVaultApplication
 
             // Configure logging
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.MFilesSysUtilsEventLogSink(restrictedToMinimumLevel: LogEventLevel.Information)
+                .WriteTo.MFilesSysUtilsEventLogSink()
                 .CreateLogger();
         }
 
 
-        [EventHandler(MFEventHandlerType.MFEventHandlerBeforeCheckInChangesFinalize, ObjectType = (int)MFBuiltInObjectType.MFBuiltInObjectTypeDocument)]
+        [EventHandler(MFEventHandlerType.MFEventHandlerBeforeCheckInChangesFinalize,
+                        ObjectType = (int)MFBuiltInObjectType.MFBuiltInObjectTypeDocument)]
         public void BeforeCheckInChangesFinalizeUpdateLogDemo(EventHandlerEnvironment env)
         {
-            Log.Information("User {UserID} has checked in document {DisplayID} at {TimeStamp}", env.CurrentUserID, env.DisplayID, DateTime.Now);
+            Log.Information("User {UserID} has checked in document {DisplayID} at {TimeStamp}",
+                                env.CurrentUserID, 
+                                env.DisplayID, 
+                                DateTime.Now);
         }
     }
 }
 ```
 
-When a user checks in a document in the vault where the Vault Application is installed. the Log.Information statement will produce a Windows Event log entry similarly to below:
+When a user checks in a document in the vault where the vault application is installed. the Log.Information statement will produce a Windows Event log entry similarly to below:
 
 ```text
 DemoVault {D449E438-89EE-42BB-9769-B862E9B1B140}
@@ -76,10 +80,47 @@ DemoVaultApp 0.1 (Process ID: 35700)
 User 1 has checked in document 1 at 05/29/2021 23:04:00
 ```
 
-
 ## Cloud vault
 
-Your Vault Application can be installed on either a local M-Files server or on a cloud vault. With the local server, you'll have access to the Windows Event log and the logging from your application.
+Your vault application can be installed on either a local M-Files server or on a cloud vault. With the local server, you'll have access to the Windows Event log and the logging from your application.
 
-A cloud vault is operated by the M-Files CloudOps team and you do not have direct access to the Windows Event log on the (Azure) server where the vault runs. If you want your Vault Application's logging, you'll have to request it from M-Files support. It's hardly ideal, but at least you're using structured logging with Serilog in your application now!
+A cloud vault is operated by the M-Files CloudOps team and you do not have direct access to the Windows Event log on the (Azure) server where the vault runs. If you want your vault application's logging, you'll have to request it from M-Files support. It's hardly ideal, but at least you're using structured logging with Serilog in your application now!
+I have another logging solution coming up that will help in logging scenarios in cloud vault application.
+
+## Sample vault application screenshots
+
+The sample vault application writes some log messages upon startup and with firing of the MFEventHandlerBeforeCheckInChangesFinalize event for an Document ObjectType.
+
+These screen shots are from the Windows Event log on a local M-Files server and from the M-Files Admin.
+
+**Starting up: Logging something in vault initialization**
+
+```csharp
+// And log some information about this VaultApp
+Log.Information("Starting up VaultApp {VaultAppName} build version {VaultAppBuildVersion} in vault {VaultName}", 
+                    thisVaultApp.Name, 
+                    _buildFileVersion, 
+                    vault.Name);
+```
+
+![EventLog-VaultAppStartInfo1](assets/EventLog-VaultAppStartInfo1.png)
+
+**Starting up: M-Files server has loaded sample vault application**
+
+![EventLog-VaultAppStartInfo2](assets/EventLog-VaultAppStartInfo2.png)
+
+**Changing log level in M-Files Admin**
+
+![MFAdmin-configuration-screenshot](assets/MFAdmin-configuration-screenshot.png)
+
+**Logging from event handler**
+
+```csharp
+Log.Information("User {UserID} has checked in document {DisplayID} at {TimeStamp}",
+                    env.CurrentUserID, 
+                    env.DisplayID, 
+                    DateTime.Now);
+```
+
+![EventLog-VaultApp-LoggedInformation](assets/EventLog-VaultApp-LoggedInformation.png)
 
