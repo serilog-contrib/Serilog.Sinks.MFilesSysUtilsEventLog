@@ -29,7 +29,7 @@ The Serilog.Sinks.MFilesSysUtilsEventLog sink uses [MFiles.VAF version 2.2.0.11]
 ## How to add Serilog.Sinks.MFilesSysUtilsEventLog to your vault application
 
 1. Open your vault application solution in Visual Studio and choose `Manage NuGet packages...`. Browse for package `Serilog.Sinks.MFilesSysUtilsEventLog` and add it to your solution.
-1. Add `using Serilog;` at the top of your application.
+1. Add `using Serilog;` at the top of your application class.
 1. In your VaultApplication.cs class, override InitializeApplication(Vault vault) and add a logging configuration bulder, where you write to the `MFilesSysUtilsEventLogSink` (see below)
 1. Add Serilog Log.xxx() statements in your vault application use case code.
 
