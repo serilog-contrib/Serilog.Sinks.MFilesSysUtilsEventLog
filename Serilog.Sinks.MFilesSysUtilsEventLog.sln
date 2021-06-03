@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{8064
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{3A6B821F-6B19-4142-94E1-E221604091C3}"
 	ProjectSection(SolutionItems) = preProject
+		README-Release-workflow.md = README-Release-workflow.md
 		README.md = README.md
 	EndProjectSection
 EndProject
