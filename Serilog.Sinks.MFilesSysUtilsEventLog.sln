@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleVaultApplication", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D6D7A700-8159-4717-AC7B-286AAC12DDF4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Collaborate", "Collaborate", "{1BBEE4DA-23A2-42A6-B66B-F7673DC96BDC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\bug_report.md = .github\bug_report.md
+		.github\feature_request.md = .github\feature_request.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
