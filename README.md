@@ -2,6 +2,8 @@
 
 A Serilog sink to write to the Windows EventLog in an M-Files vault application (via SysUtils).
 
+**IMPORTANT:** this sink can only be used in an M-Files Vault Application, as it uses the Vault Application Framework SysUtils.ReportXXXToEventLog() functions.
+
 *Please note that this library is provided "as-is" and with no warranty, explicit or otherwise. You should ensure that the functionality meets your requirements, and thoroughly test them, prior to using in any production scenarios.*
 
 ## Use case
