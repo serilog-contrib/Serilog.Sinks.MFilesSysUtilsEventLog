@@ -1,6 +1,8 @@
 # Serilog.Sinks.MFilesSysUtilsEventLog
 
-A Serilog sink to write to the Windows EventLog in an M-Files vault application (via SysUtils).
+A Serilog sink to use in an M-Files Vault Application to write to the Windows EventLog using the SysUtils.ReportXToEventLog() helpers.
+
+To use the sink, install the **Serilog.Sinks.MFilesSysUtilsEventLog nupkg** into your vault application solution; see below or browse to the [sample vault application code in this repository](samples/SampleVaultApplication) for pointers how to use it. And here is the nuget.org page for [Serilog.Sinks.MFilesSysUtilsEventLog](https://www.nuget.org/packages/Serilog.Sinks.MFilesSysUtilsEventLog/).
 
 **IMPORTANT:** this sink can only be used in an M-Files Vault Application, as it uses the Vault Application Framework SysUtils.ReportXXXToEventLog() functions.
 
@@ -16,7 +18,7 @@ The **Serilog.Sinks.MFilesSysUtilsEventLog** sink makes it possible to use *Seri
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
-    .WriteTo.MFilesSysUtilsEventLogSink(restrictedToMinimumLevel: LogEventLevel.Information)
+    .WriteTo.MFilesSysUtilsEventLogSink()
     .CreateLogger();
 
 Log.Information("Hello from the Vault Application");
