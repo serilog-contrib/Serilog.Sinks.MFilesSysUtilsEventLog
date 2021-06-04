@@ -1,6 +1,6 @@
 # Serilog.Sinks.MFilesSysUtilsEventLog
 
-[![Nuget status](https://img.shields.io/nuget/v/Serilog.Sinks.MFilesSysUtilsEventLog.svg)](https://www.nuget.org/packages/Serilog.Sinks.MFilesSysUtilsEventLog)  Serilog.Sinks.MFilesSysUtilsEventLog
+[![Nuget status](https://img.shields.io/nuget/v/Serilog.Sinks.MFilesSysUtilsEventLog.svg)](https://www.nuget.org/packages/Serilog.Sinks.MFilesSysUtilsEventLog)
 
 A Serilog sink to use in an M-Files Vault Application to write to the Windows EventLog using the SysUtils.ReportXToEventLog() helpers.
 
