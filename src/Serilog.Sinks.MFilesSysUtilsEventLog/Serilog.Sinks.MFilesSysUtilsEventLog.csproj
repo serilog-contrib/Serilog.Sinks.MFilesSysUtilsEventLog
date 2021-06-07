@@ -11,7 +11,7 @@
     <PackageTags>serilog M-Files MFiles VAF eventlog</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <FileVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmm"))</FileVersion>
-    <Description>A Serilog sink to write to the EventLog in an M-Files Vault Application (via SysUtils)</Description>
+    <Description>A Serilog sink wrapper to write to the Windows EventLog using the SysUtils.ReportXToEventLog() in an M-Files Vault Application.</Description>
     <PackageIcon>serilog-sink-nuget.png</PackageIcon>
     <PackageProjectUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
     <RepositoryUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
@@ -19,6 +19,14 @@
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <PackageReleaseNotes>Adding support for ITextFormatter, for example the RenderedCompactJsonFormatter.</PackageReleaseNotes>
     <Version>1.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <DocumentationFile>Serilog.Sinks.MFilesSysUtilsEventLog.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <DocumentationFile>Serilog.Sinks.MFilesSysUtilsEventLog.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
