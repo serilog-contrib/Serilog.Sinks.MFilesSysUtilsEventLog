@@ -25,18 +25,29 @@ using Serilog.Formatting;
 
 namespace Serilog.Sinks.MFilesSysUtilsEventLog
 {
+    /// <summary>
+    /// The MFilesSysUtilsEventLogSink that emits log events to M-Files SysUtils Event log
+    /// </summary>
     public class MFilesSysUtilsEventLogSink : ILogEventSink
     {
         const int MaximumPayloadLengthChars = 31839; // https://msdn.microsoft.com/en-us/library/e29k5ebc%28v=vs.110%29.aspx
 
         private readonly ITextFormatter _textFormatter;
 
+        /// <summary>
+        /// Construct the MFilesSysUtilsEventLogSink with a text formatter
+        /// </summary>
+        /// <param name="formatter"></param>
         public MFilesSysUtilsEventLogSink(ITextFormatter formatter)
         {
             _textFormatter              = formatter ?? throw new ArgumentNullException(nameof(formatter));
 
         }
 
+        /// <summary>
+        /// Write the LogEvent to the SysUtils Event log
+        /// </summary>
+        /// <param name="logEvent"></param>
         public void Emit(LogEvent logEvent)
         {
             // Do not log Debug or Verbose level
@@ -45,13 +56,13 @@ namespace Serilog.Sinks.MFilesSysUtilsEventLog
                 return;
             }
 
-
             using (var payloadWriter = new StringWriter())
             {
                 _textFormatter.Format(logEvent, payloadWriter);
 
                 var payload = payloadWriter.ToString();
 
+                // Even the event log seems to have a limit...
                 if (payload.Length > MaximumPayloadLengthChars)
                 {
                     payload = payload.Substring(0, MaximumPayloadLengthChars);

@@ -26,6 +26,9 @@ using Serilog.Sinks.MFilesSysUtilsEventLog;
 
 namespace Serilog
 {
+    /// <summary>
+    /// Adds the WriteTo.MFilesSysUtilsEventLogSink() extension method to <see cref="LoggerConfiguration"/>.
+    /// </summary>
     public static class MFilesSysUtilsEventLogSinkExtensions
     {
         const string DefaultOutputTemplate = "{Message}{NewLine}{Exception}";
@@ -36,10 +39,13 @@ namespace Serilog
         /// <param name="loggerSinkConfiguration">Logger sink configuration</param>
         /// <param name="restrictedToMinimumLevel">The minimum level for
         /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
+        /// <param name="outputTemplate">A message template describing the format used to write to the sink.
+        /// The default is <code>"[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"</code>.</param>
         /// <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
         /// <param name="levelSwitch">The minimum level for
         /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
-        /// <returns></returns>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <exception cref="ArgumentNullException">When <paramref name="loggerSinkConfiguration"/> is <code>null</code></exception>
         public static LoggerConfiguration MFilesSysUtilsEventLogSink(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             LogEventLevel restrictedToMinimumLevel                  = LevelAlias.Minimum,
@@ -64,7 +70,9 @@ namespace Serilog
         /// <param name="restrictedToMinimumLevel">The minimum level for
         /// events passed through the sink. Ignored when <paramref name="levelSwitch"/> is specified.</param>
         /// <param name="levelSwitch"></param>
-        /// <returns></returns>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <exception cref="ArgumentNullException">When <paramref name="loggerSinkConfiguration"/> is <code>null</code></exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="formatter"/> is <code>null</code></exception>
         public static LoggerConfiguration MFilesSysUtilsEventLogSink(
             this LoggerSinkConfiguration loggerSinkConfiguration,
             ITextFormatter formatter,
