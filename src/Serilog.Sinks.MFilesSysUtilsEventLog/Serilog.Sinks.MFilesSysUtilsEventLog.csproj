@@ -19,6 +19,9 @@
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <PackageReleaseNotes>Adding support for ITextFormatter, for example the RenderedCompactJsonFormatter.</PackageReleaseNotes>
     <Version>1.1.0</Version>
+    <PackageReleaseNotes>Serilog.Sinks.MFilesSysUtilsEventLog.dll is now strongly named (signed).</PackageReleaseNotes>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
