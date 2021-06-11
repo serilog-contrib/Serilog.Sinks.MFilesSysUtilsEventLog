@@ -16,10 +16,9 @@
     <PackageProjectUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
     <RepositoryUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <PackageReleaseNotes>Adding support for ITextFormatter, for example the RenderedCompactJsonFormatter.</PackageReleaseNotes>
-    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
     <PackageReleaseNotes>Serilog.Sinks.MFilesSysUtilsEventLog.dll is now strongly named (signed).</PackageReleaseNotes>
+    <Version>1.1.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
