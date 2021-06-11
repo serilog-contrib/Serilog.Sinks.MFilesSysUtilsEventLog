@@ -4,7 +4,7 @@
 
 A Serilog sink wrapper to write to the Windows EventLog using the SysUtils.ReportXToEventLog() in an M-Files Vault Application.
 
-To use the sink, install the **Serilog.Sinks.MFilesSysUtilsEventLog nupkg** into your vault application solution; see below or browse to the [sample vault application code in this repository](samples/SampleVaultApplication) for pointers how to use it. And here is the nuget.org page for [Serilog.Sinks.MFilesSysUtilsEventLog](https://www.nuget.org/packages/Serilog.Sinks.MFilesSysUtilsEventLog/).
+To use the sink, install the **Serilog.Sinks.MFilesSysUtilsEventLog nupkg** into your vault application solution; see below or browse to the [sample vault application code in this repository](samples\SampleVaultApplication\VaultApplication.cs) for pointers how to use it. And here is the nuget.org page for [Serilog.Sinks.MFilesSysUtilsEventLog](https://www.nuget.org/packages/Serilog.Sinks.MFilesSysUtilsEventLog/).
 
 **IMPORTANT:** this sink can only be used in an M-Files Vault Application, as it uses the Vault Application Framework SysUtils.ReportXXXToEventLog() functions.
 
@@ -35,9 +35,9 @@ The Serilog.Sinks.MFilesSysUtilsEventLog sink uses [MFiles.VAF version 2.2.0.11]
 1. Open your vault application solution in Visual Studio and choose `Manage NuGet packages...`. Browse for package `Serilog.Sinks.MFilesSysUtilsEventLog` and add it to your solution.
 1. Add `using Serilog;` at the top of your application class.
 1. In your VaultApplication.cs class, override InitializeApplication(Vault vault) and add a logging configuration bulder, where you write to the `MFilesSysUtilsEventLogSink` (see below)
-1. Add Serilog Log.xxx() statements in your vault application use case code.
+1. Add Serilog Log.xxx() statements in your vault application use case code. See [Serilog wiki](https://github.com/serilog/serilog/wiki/Writing-Log-Events) about writing log events.
 
-See the sample vault application in this solution that uses the sink and even allows for setting the logging level in the vault application configuration in M-Files Admin.
+The sample vault application in this repository uses the sink and even allows for changing the logging level in the vault application configuration in M-Files Admin.
 
 ## Example use in a Vault Application
 
@@ -97,9 +97,9 @@ I have another logging solution coming up that will help in logging scenarios in
 
 The sample vault application writes some log messages upon startup and with firing of the MFEventHandlerBeforeCheckInChangesFinalize event for an Document ObjectType.
 
-It has not one but **two** MFilesSysUtilsEventLogSinks configured, one with the default output message template and the other with the RenderedCompactJsonFormatter and outputs the log event in JSON format to the Windows event log and contains *all* log event properties.
+It has not one but **two** MFilesSysUtilsEventLogSinks configured, one with the default output message template and the other with the RenderedCompactJsonFormatter which outputs the log event in *JSON format* to the Windows event log as well and shows *all* log event properties.
 
-Because of the two sinks, the Windows Event Log will contain the **same** log event twice, but differently formatted. It demonstrates that a log pipeline can be build with multiple sinks, even the same sink with different parameters.
+Because of the two sinks, the Windows Event Log will contain the **same** log event twice, but formatted differently. It demonstrates that a log pipeline can be build with multiple sinks, even the same sink with different parameters.
 
 ```text
 // The FIRST will only show the log event message; the "MFEventType" property is not shown, because it is not part of the default message template.
