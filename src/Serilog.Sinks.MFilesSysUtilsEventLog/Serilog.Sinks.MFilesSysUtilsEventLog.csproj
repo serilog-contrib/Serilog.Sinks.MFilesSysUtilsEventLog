@@ -13,11 +13,11 @@
     <FileVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmm"))</FileVersion>
     <Description>A Serilog sink wrapper to write to the Windows EventLog using the SysUtils.ReportXToEventLog() in an M-Files Vault Application.</Description>
     <PackageIcon>serilog-sink-nuget.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/victorvogelpoel/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <PackageReleaseNotes>Serilog.Sinks.MFilesSysUtilsEventLog.dll is now strongly named (signed).</PackageReleaseNotes>
+    <PackageReleaseNotes>Updating project and repository home to its new home at the serilog-contrib organization.</PackageReleaseNotes>
     <Version>1.1.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
