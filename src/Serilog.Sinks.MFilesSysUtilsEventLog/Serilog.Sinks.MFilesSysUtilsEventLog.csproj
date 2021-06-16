@@ -4,14 +4,10 @@
     <TargetFrameworks>net45</TargetFrameworks>
     <RootNamespace>Serilog</RootNamespace>
     <Title>Serilog.Sinks.MFilesSysUtilsEventLog</Title>
-    <Authors>Victor Vogelpoel</Authors>
-    <Company>Dramatic Development</Company>
-    <Copyright>Copyright (c) 2021 Dramatic Development - Victor Vogelpoel</Copyright>
+    <Description>A Serilog sink wrapper for the M-Files Vault Application SysUtils.ReportXToEventLog() to write to the Windows event log.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageTags>serilog M-Files MFiles VAF eventlog</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>$([System.DateTime]::Now.ToString("yyyy.MM.dd.HHmm"))</FileVersion>
-    <Description>A Serilog sink wrapper for the M-Files Vault Application SysUtils.ReportXToEventLog() to write to the Windows event log.</Description>
     <PackageIcon>serilog-sink-nuget.png</PackageIcon>
     <PackageProjectUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
