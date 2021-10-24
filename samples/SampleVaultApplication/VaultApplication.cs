@@ -96,14 +96,15 @@ namespace SampleVaultApplication
         /// <param name="context"></param>
         /// <param name="clientOps"></param>
         /// <param name="oldConfiguration"></param>
-        protected override void OnConfigurationUpdated(IConfigurationRequestContext context, ClientOperations clientOps, Configuration oldConfiguration)
+        protected override void OnConfigurationUpdated(Configuration oldConfiguration, bool updateExternals)
         {
             if (oldConfiguration.LogLevel != Configuration.LogLevel)
             {
                 ConfigureLoggingLevelSwitch(Configuration.LogLevel);
+
+                Log.Information("Log level changed to {LogLevel}", Configuration.LogLevel);
             }
 
-            Log.Information("Log level changed to {LogLevel}", Configuration.LogLevel);
         }
 
 
