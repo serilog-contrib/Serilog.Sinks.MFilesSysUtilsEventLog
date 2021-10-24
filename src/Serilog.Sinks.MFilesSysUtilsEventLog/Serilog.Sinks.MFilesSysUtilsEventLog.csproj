@@ -12,9 +12,10 @@
     <PackageProjectUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</PackageProjectUrl>
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <PackageReleaseNotes>Updating project and repository home to its new home at the serilog-contrib organization.</PackageReleaseNotes>
-    <Version>1.1.1</Version>
+    <AssemblyVersion>2.3.623.2</AssemblyVersion>
+    <PackageReleaseNotes>Updating reference to Vault Application Framework nuget version 2.3.623.2.
+Aligning versioning to Vault Application Framework.</PackageReleaseNotes>
+    <Version>2.3.623.2</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -28,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MFiles.VAF" Version="2.2.0.11" />
+    <PackageReference Include="MFiles.VAF" Version="2.3.623.2" />
     <PackageReference Include="Serilog" Version="2.10.0" />
   </ItemGroup>
 
