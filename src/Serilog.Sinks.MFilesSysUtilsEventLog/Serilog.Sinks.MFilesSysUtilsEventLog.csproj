@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>2.3.623.6</AssemblyVersion>
-    <PackageReleaseNotes>Updating reference to Vault Application Framework nuget version 2.3.623.6.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updating reference to MFiles.VAF nuget release version 2.3.623.6.</PackageReleaseNotes>
     <Version>2.3.623.6</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
