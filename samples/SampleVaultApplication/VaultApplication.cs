@@ -94,8 +94,9 @@ namespace SampleVaultApplication
         /// Update the Serilog loggingLevelSwitch, when the LogLevel configuration for the Vault Application is changed in M-Files Admin.
         /// </summary>
         /// <param name="oldConfiguration">old vaultapp configuration</param>
+        /// <param name="isValid"></param>
         /// <param name="updateExternals"></param>
-        protected override void OnConfigurationUpdated(Configuration oldConfiguration, bool updateExternals)
+        protected override void OnConfigurationUpdated(Configuration oldConfiguration, bool isValid, bool updateExternals)
         {
             if (oldConfiguration.LogLevel != Configuration.LogLevel)
             {
@@ -110,7 +111,7 @@ namespace SampleVaultApplication
                 configLogger.Information("Log level changed to {LogLevel} bij an administrator", Configuration.LogLevel);
             }
 
-            base.OnConfigurationUpdated(oldConfiguration, updateExternals);
+            base.OnConfigurationUpdated(oldConfiguration, isValid, updateExternals);
         }
 
 
