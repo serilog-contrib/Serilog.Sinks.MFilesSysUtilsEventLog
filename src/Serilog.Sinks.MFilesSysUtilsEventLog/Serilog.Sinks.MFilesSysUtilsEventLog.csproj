@@ -13,8 +13,8 @@
     <RepositoryUrl>https://github.com/serilog-contrib/Serilog.Sinks.MFilesSysUtilsEventLog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>2.3.623.6</AssemblyVersion>
-    <PackageReleaseNotes>Updating reference to MFiles.VAF nuget release version 2.3.623.6.</PackageReleaseNotes>
-    <Version>2.3.623.6</Version>
+    <PackageReleaseNotes>Updating reference to MFiles.VAF nuget release version 2.3.623.9.</PackageReleaseNotes>
+    <Version>2.3.623.9</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Serilog.Sinks.MFilesSysUtilsEventLog.snk</AssemblyOriginatorKeyFile>
     <Copyright>Copyright (c) 2022 Dramatic Development - Victor Vogelpoel</Copyright>
@@ -29,8 +29,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MFiles.VAF" Version="2.3.623.6" />
-    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="MFiles.VAF" Version="2.3.623.9" />
+    <PackageReference Include="Serilog" Version="2.11.0" />
   </ItemGroup>
 
   <ItemGroup>
